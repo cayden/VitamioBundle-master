@@ -53,7 +53,8 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 	private boolean mIsVideoSizeKnown = false;
 	private boolean mIsVideoReadyToBePlayed = false;
 	String ROOT_SDCARD_DIR = Environment.getExternalStorageDirectory().getPath()+"/";
-	String UDP_TS="udp://@192.168.1.244:6666";
+	//239.0.1.2
+	String UDP_TS="udp://@224.0.1.2:6666";
 	/**
 	 * 
 	 * Called when the activity is first created.
@@ -117,8 +118,10 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 			mMediaPlayer.setOnPreparedListener(this);
 			mMediaPlayer.setOnVideoSizeChangedListener(this);
 			mMediaPlayer.setDataSource(path);
+			mMediaPlayer.setLooping(true);
 			mMediaPlayer.setDisplay(holder);
 			mMediaPlayer.prepareAsync();
+
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 		} catch (Exception e) {
@@ -141,7 +144,7 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 				break;
 			case MediaPlayer.MEDIA_INFO_DOWNLOAD_RATE_CHANGED:
 				// 下载的速率发生了改变
-				Log.i(TAG,"下载速度:"+extra+"kb/s");
+//				Log.i(TAG,"下载速度:"+extra+"kb/s");
 				// setText("" + arg2 + "kb/s" + "  ");
 				break;
 		}
@@ -149,7 +152,7 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 	}
 
 	public void onBufferingUpdate(MediaPlayer mp, int percent) {
-		 Log.d(TAG, "onBufferingUpdate percent:" + percent);
+//		 Log.d(TAG, "onBufferingUpdate percent:" + percent);
 //		if(percent>=50){
 //			mp.start();
 //		}
@@ -159,8 +162,14 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 
 	}
 
-	public void onCompletion(MediaPlayer arg0) {
+	public void onCompletion(MediaPlayer mp) {
 		Log.d(TAG, "onCompletion called");
+		try{
+//			mMediaPlayer.start();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 	}
 
 	public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
@@ -200,8 +209,8 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 
 	public void surfaceCreated(SurfaceHolder holder) {
 		Log.d(TAG, "surfaceCreated called");
-		playVideo(extras.getInt(MEDIA));
-
+//		playVideo(extras.getInt(MEDIA));
+		playVideo(STREAM_VIDEO);
 	}
 
 	@Override

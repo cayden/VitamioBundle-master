@@ -26,7 +26,7 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".VitamioListActivity" >
+        <activity android:name=".MediaPlayerDemo_Video" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,10 +43,10 @@
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:label="Media/VideoView" >
         </activity>
-        <activity
-            android:name=".MediaPlayerDemo_Video"
-            android:label="Media/MediaPlayer" >
-        </activity>
+        <!--<activity-->
+            <!--android:name=".MediaPlayerDemo_Video"-->
+            <!--android:label="Media/MediaPlayer" >-->
+        <!--</activity>-->
         <activity
             android:name=".MediaPlayerDemo_setSurface"
             android:label="Media/MediaPlayer" >
