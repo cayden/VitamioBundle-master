@@ -112,15 +112,17 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 
 			// Create a new media player and set the listeners
 			mMediaPlayer = new MediaPlayer(this,true);
+
+			mMediaPlayer.setDataSource(path);
+//			mMediaPlayer.setLooping(true);
+			mMediaPlayer.setDisplay(holder);
+			mMediaPlayer.prepare();
+
 			mMediaPlayer.setOnInfoListener(this);
 			mMediaPlayer.setOnBufferingUpdateListener(this);
 			mMediaPlayer.setOnCompletionListener(this);
 			mMediaPlayer.setOnPreparedListener(this);
 			mMediaPlayer.setOnVideoSizeChangedListener(this);
-			mMediaPlayer.setDataSource(path);
-			mMediaPlayer.setLooping(true);
-			mMediaPlayer.setDisplay(holder);
-			mMediaPlayer.prepareAsync();
 
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -128,27 +130,48 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 			Log.e(TAG, "error: " + e.getMessage(), e);
 		}
 	}
-
+	int count=-1;
 	@Override
 	public boolean onInfo(MediaPlayer mp, int what, int extra) {
+		Log.d(TAG,"what="+what+",extra="+extra);
 		switch (what) {
 			case MediaPlayer.MEDIA_INFO_BUFFERING_START:
 				// 开始缓冲，如果正在播放，则停止
+				Log.d(TAG,"isplaying="+mMediaPlayer.isPlaying()+",count="+count);
+//				if(count>0){
+//					startVideoPlayback();
+//				}
 				if (mMediaPlayer.isPlaying()) {
-					mMediaPlayer.pause();
+//					mMediaPlayer.pause();
 				}
+//				mp.start();
+//				startVideoPlayback();
+
 				break;
 			case MediaPlayer.MEDIA_INFO_BUFFERING_END:
 				// 缓冲完毕，开始播放
 				mMediaPlayer.start();
+//				startVideoPlayback();
 				break;
 			case MediaPlayer.MEDIA_INFO_DOWNLOAD_RATE_CHANGED:
 				// 下载的速率发生了改变
 //				Log.i(TAG,"下载速度:"+extra+"kb/s");
 				// setText("" + arg2 + "kb/s" + "  ");
+				int progress= mMediaPlayer.getBufferProgress();
+				Log.i(TAG,"下载速度:"+extra+"kb/s progress="+progress);
+				if(progress==0){
+					if(count>6){
+						Log.i(TAG,"再次播放:");
+//						mMediaPlayer.start();
+						VitamioApplication.getInstance().killPid();
+					}
+					count++;
+				}else{
+					count=-1;
+				}
 				break;
 		}
-		return true;
+		return false;
 	}
 
 	public void onBufferingUpdate(MediaPlayer mp, int percent) {

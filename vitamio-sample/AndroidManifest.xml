@@ -16,7 +16,7 @@
     <application
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
-
+        android:name=".VitamioApplication"
         android:label="@string/vitamio_demo_name" >
 
         <!-- Don't forgot InitActivity -->
@@ -26,7 +26,7 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".MediaPlayerDemo_Video" >
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,10 +43,12 @@
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:label="Media/VideoView" >
         </activity>
-        <!--<activity-->
-            <!--android:name=".MediaPlayerDemo_Video"-->
-            <!--android:label="Media/MediaPlayer" >-->
-        <!--</activity>-->
+        <activity
+            android:launchMode="singleTop"
+            android:name=".MediaPlayerDemo_Video"
+            android:process=":remote"
+            android:label="Media/MediaPlayer" >
+        </activity>
         <activity
             android:name=".MediaPlayerDemo_setSurface"
             android:label="Media/MediaPlayer" >
