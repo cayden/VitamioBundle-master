@@ -61,7 +61,7 @@ public class VitamioApplication extends Application {
     public  int getProcessPid(Context paramContext, String paramString){
         ActivityManager mActivityManager = (ActivityManager)paramContext.getSystemService(Context.ACTIVITY_SERVICE);
         for(ActivityManager.RunningAppProcessInfo appProcess : mActivityManager.getRunningAppProcesses())  {
-            if(appProcess.processName == paramString){
+            if(appProcess.processName .equals(paramString)){
                 return appProcess.pid;
             }
         }

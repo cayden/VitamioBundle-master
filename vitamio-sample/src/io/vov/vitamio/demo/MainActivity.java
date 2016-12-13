@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
 
 /**
  * Created by cuiran
@@ -22,8 +21,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Toast.makeText(this,"正在显示..",Toast.LENGTH_SHORT).show();
-        handler.sendEmptyMessageDelayed(1,5000);
+        handler.sendEmptyMessageDelayed(1,1000);
     }
 
     private class MyHandler extends Handler{

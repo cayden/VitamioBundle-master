@@ -160,9 +160,8 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 				int progress= mMediaPlayer.getBufferProgress();
 				Log.i(TAG,"下载速度:"+extra+"kb/s progress="+progress);
 				if(progress==0){
-					if(count>6){
+					if(count>2){
 						Log.i(TAG,"再次播放:");
-//						mMediaPlayer.start();
 						VitamioApplication.getInstance().killPid();
 					}
 					count++;
@@ -188,7 +187,7 @@ public class MediaPlayerDemo_Video extends Activity implements OnInfoListener, O
 	public void onCompletion(MediaPlayer mp) {
 		Log.d(TAG, "onCompletion called");
 		try{
-//			mMediaPlayer.start();
+			VitamioApplication.getInstance().killPid();
 		}catch (Exception e){
 			e.printStackTrace();
 		}
